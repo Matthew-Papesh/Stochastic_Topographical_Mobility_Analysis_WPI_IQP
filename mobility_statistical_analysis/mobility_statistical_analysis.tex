@@ -1,0 +1,726 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Stochastic Topographical Mobility Analysis (STMA) in the Copenhagen Metropolitan Area},
+  pdfauthor={Matthew Papesh},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Stochastic Topographical Mobility Analysis (STMA) in the
+Copenhagen Metropolitan Area}
+\author{Matthew Papesh}
+\date{2025-04-23}
+
+\begin{document}
+\maketitle
+
+\#Include needed libraries below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{suppressWarnings}\NormalTok{(\{}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)) \{}
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\NormalTok{ \}}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"ggtext"}\NormalTok{)) \{}
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggtext"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"ggtext"}\NormalTok{)}
+\NormalTok{ \}}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)) \{}
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\NormalTok{ \}}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)) \{ }
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+\NormalTok{ \}}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)) \{}
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)}
+\NormalTok{ \}}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"gridExtra"}\NormalTok{)) \{}
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"gridExtra"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"gridExtra"}\NormalTok{)}
+\NormalTok{ \}}
+ \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)) \{}
+ \FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{, }\AttributeTok{repo=}\StringTok{"http://cran.us.r{-}project.org"}\NormalTok{, }\AttributeTok{quite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{message=}\ConstantTok{FALSE}\NormalTok{)}
+ \FunctionTok{require}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)}
+\NormalTok{ \}}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ggtext
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: tidyverse
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v lubridate 1.9.4     v tibble    3.2.1
+## v purrr     1.0.4     v tidyr     1.3.1
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+## Loading required package: DescTools
+## 
+## Loading required package: gridExtra
+## 
+## 
+## Attaching package: 'gridExtra'
+## 
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+## 
+## 
+## Loading required package: knitr
+\end{verbatim}
+
+\section{Import mobility data:}\label{import-mobility-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# imported node data by case study area }
+\NormalTok{nordhavn\_nodes }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./clean\_network\_mobility\_data/nordhavn\_nodes.csv"}\NormalTok{)}
+\NormalTok{mjolnerparken\_nodes }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./clean\_network\_mobility\_data/mjolnerparken\_nodes.csv"}\NormalTok{)}
+\NormalTok{tingbjerg\_nodes }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./clean\_network\_mobility\_data/tingbjerg\_nodes.csv"}\NormalTok{)}
+\NormalTok{taastrupgaard\_nodes }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./clean\_network\_mobility\_data/taastrupgaard\_nodes.csv"}\NormalTok{)}
+\CommentTok{\# imported trip data by case study area }
+\NormalTok{nordhavn\_trips }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./stma\_results/nordhavn\_results.csv"}\NormalTok{)}
+\NormalTok{mjolnerparken\_trips }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./stma\_results/mjolnerparken\_results.csv"}\NormalTok{)}
+\NormalTok{tingbjerg\_trips }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./stma\_results/tingbjerg\_results.csv"}\NormalTok{)}
+\NormalTok{taastrupgaard\_trips }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./stma\_results/taastrupgaard\_results.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{qaulitative location data:}\label{qaulitative-location-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# count the number of features of a value type in a given vector}
+\NormalTok{count\_feat }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(vector, type\_value) \{}
+  \CommentTok{\# vector     : vector name }
+  \CommentTok{\# type\_value : the value to count inside given vector}
+  \FunctionTok{sum}\NormalTok{(vector }\SpecialCharTok{==}\NormalTok{ type\_value, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\# vectors of feature types for each case study}
+\NormalTok{nord\_f }\OtherTok{\textless{}{-}}\NormalTok{ (nordhavn\_nodes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(node\_id }\SpecialCharTok{==} \StringTok{"inner"} \SpecialCharTok{|}\NormalTok{ node\_id }\SpecialCharTok{==} \StringTok{"frontier"}\NormalTok{))}\SpecialCharTok{$}\NormalTok{type}
+\NormalTok{mjol\_f }\OtherTok{\textless{}{-}}\NormalTok{ (mjolnerparken\_nodes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(node\_id }\SpecialCharTok{==} \StringTok{"inner"} \SpecialCharTok{|}\NormalTok{ node\_id }\SpecialCharTok{==} \StringTok{"frontier"}\NormalTok{))}\SpecialCharTok{$}\NormalTok{type}
+\NormalTok{ting\_f }\OtherTok{\textless{}{-}}\NormalTok{ (tingbjerg\_nodes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(node\_id }\SpecialCharTok{==} \StringTok{"inner"} \SpecialCharTok{|}\NormalTok{ node\_id }\SpecialCharTok{==} \StringTok{"frontier"}\NormalTok{))}\SpecialCharTok{$}\NormalTok{type}
+\NormalTok{taast\_f }\OtherTok{\textless{}{-}}\NormalTok{ (taastrupgaard\_nodes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(node\_id }\SpecialCharTok{==} \StringTok{"inner"} \SpecialCharTok{|}\NormalTok{ node\_id }\SpecialCharTok{==} \StringTok{"frontier"}\NormalTok{))}\SpecialCharTok{$}\NormalTok{type}
+
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Case.Study.Area    =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Nordhavn"}\NormalTok{,}\StringTok{"Mjølnerparken"}\NormalTok{,}\StringTok{"Tingbjerg"}\NormalTok{,}\StringTok{"Taastrupgaard"}\NormalTok{), }\AttributeTok{each =} \DecValTok{5}\NormalTok{),}
+  \AttributeTok{Feature =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Housing"}\NormalTok{,}\StringTok{"Necessity"}\NormalTok{,}\StringTok{"Amenity"}\NormalTok{,}\StringTok{"Company"}\NormalTok{,}\StringTok{"Parking"}\NormalTok{), }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{Count   =} \FunctionTok{c}\NormalTok{(}
+    \FunctionTok{count\_feat}\NormalTok{(nord\_f,  }\StringTok{"house"}\NormalTok{),   }\FunctionTok{count\_feat}\NormalTok{(nord\_f,  }\StringTok{"necessity"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(nord\_f,  }\StringTok{"amenity"}\NormalTok{), }\FunctionTok{count\_feat}\NormalTok{(nord\_f,  }\StringTok{"company"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(nord\_f,  }\StringTok{"parking"}\NormalTok{),}
+
+    \FunctionTok{count\_feat}\NormalTok{(mjol\_f,  }\StringTok{"house"}\NormalTok{),   }\FunctionTok{count\_feat}\NormalTok{(mjol\_f,  }\StringTok{"necessity"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(mjol\_f,  }\StringTok{"amenity"}\NormalTok{), }\FunctionTok{count\_feat}\NormalTok{(mjol\_f,  }\StringTok{"company"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(mjol\_f,  }\StringTok{"parking"}\NormalTok{),}
+
+    \FunctionTok{count\_feat}\NormalTok{(ting\_f,  }\StringTok{"house"}\NormalTok{),   }\FunctionTok{count\_feat}\NormalTok{(ting\_f,  }\StringTok{"necessity"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(ting\_f,  }\StringTok{"amenity"}\NormalTok{), }\FunctionTok{count\_feat}\NormalTok{(ting\_f,  }\StringTok{"company"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(ting\_f,  }\StringTok{"parking"}\NormalTok{),}
+
+    \FunctionTok{count\_feat}\NormalTok{(taast\_f, }\StringTok{"house"}\NormalTok{),   }\FunctionTok{count\_feat}\NormalTok{(taast\_f, }\StringTok{"necessity"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(taast\_f, }\StringTok{"amenity"}\NormalTok{), }\FunctionTok{count\_feat}\NormalTok{(taast\_f, }\StringTok{"company"}\NormalTok{),}
+    \FunctionTok{count\_feat}\NormalTok{(taast\_f, }\StringTok{"parking"}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Case.Study.Area, }\AttributeTok{y =}\NormalTok{ Count, }\AttributeTok{fill =}\NormalTok{ Feature)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{" Case Study Area Features"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+  \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{),       }\CommentTok{\# Title text size}
+  \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# X{-}axis label size}
+  \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+  \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# X{-}axis tick labels size}
+  \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+  \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+  \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-3-1.pdf}
+\#
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# case study area data grouped}
+\NormalTok{areas }\OtherTok{\textless{}{-}} \FunctionTok{data\_frame}\NormalTok{(}
+  \AttributeTok{distance\_km =} \FunctionTok{c}\NormalTok{(nordhavn\_trips}\SpecialCharTok{$}\NormalTok{distance\_km, mjolnerparken\_trips}\SpecialCharTok{$}\NormalTok{distance\_km, tingbjerg\_trips}\SpecialCharTok{$}\NormalTok{distance\_km, taastrupgaard\_trips}\SpecialCharTok{$}\NormalTok{distance\_km),}
+  \AttributeTok{time\_min =} \FunctionTok{c}\NormalTok{(nordhavn\_trips}\SpecialCharTok{$}\NormalTok{time\_min, mjolnerparken\_trips}\SpecialCharTok{$}\NormalTok{time\_min, tingbjerg\_trips}\SpecialCharTok{$}\NormalTok{time\_min, taastrupgaard\_trips}\SpecialCharTok{$}\NormalTok{time\_min),}
+  \AttributeTok{trip\_speed =} \FunctionTok{c}\NormalTok{(nordhavn\_trips}\SpecialCharTok{$}\NormalTok{distance\_km}\SpecialCharTok{/}\NormalTok{nordhavn\_trips}\SpecialCharTok{$}\NormalTok{time\_min, mjolnerparken\_trips}\SpecialCharTok{$}\NormalTok{distance\_km}\SpecialCharTok{/}\NormalTok{mjolnerparken\_trips}\SpecialCharTok{$}\NormalTok{time\_min, tingbjerg\_trips}\SpecialCharTok{$}\NormalTok{distance\_km}\SpecialCharTok{/}\NormalTok{tingbjerg\_trips}\SpecialCharTok{$}\NormalTok{time\_min, taastrupgaard\_trips}\SpecialCharTok{$}\NormalTok{distance\_km}\SpecialCharTok{/}\NormalTok{taastrupgaard\_trips}\SpecialCharTok{$}\NormalTok{time\_min),}
+  \AttributeTok{trip\_type =} \FunctionTok{c}\NormalTok{(nordhavn\_trips}\SpecialCharTok{$}\NormalTok{sample\_id, mjolnerparken\_trips}\SpecialCharTok{$}\NormalTok{sample\_id, tingbjerg\_trips}\SpecialCharTok{$}\NormalTok{sample\_id, taastrupgaard\_trips}\SpecialCharTok{$}\NormalTok{sample\_id),}
+  \AttributeTok{area\_name =} \FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"Nordhavn"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(nordhavn\_trips)), }\FunctionTok{rep}\NormalTok{(}\StringTok{"Mjølnerparken"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(mjolnerparken\_trips)), }\FunctionTok{rep}\NormalTok{(}\StringTok{"Tingbjerg"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(tingbjerg\_trips)), }\FunctionTok{rep}\NormalTok{(}\StringTok{"Taastrupgaard"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(taastrupgaard\_trips)))}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: `data_frame()` was deprecated in tibble 1.1.0.
+## i Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# case study area data filtered by trip}
+\NormalTok{walk\_areas }\OtherTok{\textless{}{-}}\NormalTok{ areas }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(trip\_type }\SpecialCharTok{==} \StringTok{"walk"}\NormalTok{)}
+\NormalTok{bike\_areas }\OtherTok{\textless{}{-}}\NormalTok{ areas }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(trip\_type }\SpecialCharTok{==} \StringTok{"bike"}\NormalTok{)}
+\NormalTok{local\_transit\_areas }\OtherTok{\textless{}{-}}\NormalTok{ areas }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(trip\_type }\SpecialCharTok{==} \StringTok{"local"}\NormalTok{)}
+\NormalTok{commute\_areas }\OtherTok{\textless{}{-}}\NormalTok{ areas }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(trip\_type }\SpecialCharTok{==} \StringTok{"commute"}\NormalTok{)}
+\NormalTok{alt\_commute\_areas }\OtherTok{\textless{}{-}}\NormalTok{ areas }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(trip\_type }\SpecialCharTok{==} \StringTok{"alt\_commute"}\NormalTok{)}
+\CommentTok{\# rename area for alternative commute }
+\NormalTok{alt\_commute\_areas}\SpecialCharTok{$}\NormalTok{area\_name }\OtherTok{=} \FunctionTok{paste0}\NormalTok{(alt\_commute\_areas}\SpecialCharTok{$}\NormalTok{area\_name, }\FunctionTok{rep}\NormalTok{(}\StringTok{" by Train"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(alt\_commute\_areas)))}
+\CommentTok{\# combine alternative commutes back into main list }
+\NormalTok{commute\_areas }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(commute\_areas, alt\_commute\_areas)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{create density charts for test scenarios comparing case study
+areas}\label{create-density-charts-for-test-scenarios-comparing-case-study-areas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{density\_chart\_walk }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ walk\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ distance\_km, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.15}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Distance (km)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+  \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{),       }\CommentTok{\# Title text size}
+  \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# X{-}axis label size}
+  \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+  \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# X{-}axis tick labels size}
+  \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+  \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+  \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## i Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{density\_chart\_bike }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ bike\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ distance\_km, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.15}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Distance (km)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+  \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{),       }\CommentTok{\# Title text size}
+  \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# X{-}axis label size}
+  \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+  \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# X{-}axis tick labels size}
+  \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+  \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+  \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+
+\NormalTok{density\_chart\_local\_transit }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ local\_transit\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ distance\_km, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.15}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Distance (km)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+  \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{),       }\CommentTok{\# Title text size}
+  \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# X{-}axis label size}
+  \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+  \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# X{-}axis tick labels size}
+  \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+  \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+  \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+
+\NormalTok{density\_chart\_commute }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ commute\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ distance\_km, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.15}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Distance (km)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+  \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{),       }\CommentTok{\# Title text size}
+  \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# X{-}axis label size}
+  \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+  \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# X{-}axis tick labels size}
+  \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+  \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+  \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{create boxplots for test scenarios comparing case study
+areas}\label{create-boxplots-for-test-scenarios-comparing-case-study-areas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boxplot\_walk }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ walk\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ area\_name, }\AttributeTok{y =}\NormalTok{ trip\_speed, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.05}\NormalTok{, }\FloatTok{0.10}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Speed (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{, }
+    \AttributeTok{axis.title.x =} \FunctionTok{element\_blank}\NormalTok{(), }
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{(), }
+    \AttributeTok{axis.ticks.x =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+    \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+    \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+
+\NormalTok{boxplot\_bike }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ bike\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ area\_name, }\AttributeTok{y =}\NormalTok{ trip\_speed, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Speed (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{, }
+    \AttributeTok{axis.title.x =} \FunctionTok{element\_blank}\NormalTok{(), }
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{(), }
+    \AttributeTok{axis.ticks.x =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+    \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+    \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+
+\NormalTok{boxplot\_local\_transit }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ local\_transit\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ area\_name, }\AttributeTok{y =}\NormalTok{ trip\_speed, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Speed (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{, }
+    \AttributeTok{axis.title.x =} \FunctionTok{element\_blank}\NormalTok{(), }
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{(), }
+    \AttributeTok{axis.ticks.x =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+    \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+    \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+
+\NormalTok{boxplot\_commute }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ commute\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ area\_name, }\AttributeTok{y =}\NormalTok{ trip\_speed, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Speed (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{, }\AttributeTok{axis.title.x =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{axis.ticks.x =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+  \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{),       }\CommentTok{\# Title text size}
+  \AttributeTok{axis.title.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# X{-}axis label size}
+  \AttributeTok{axis.title.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Y{-}axis label size}
+  \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# X{-}axis tick labels size}
+  \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),       }\CommentTok{\# Y{-}axis tick labels size}
+  \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),      }\CommentTok{\# Legend title size}
+  \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)        }\CommentTok{\# Legend item labels size}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{visualize STMA results:}\label{visualize-stma-results}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(grid)}
+
+\NormalTok{walk\_title }\OtherTok{\textless{}{-}} \FunctionTok{textGrob}\NormalTok{(}
+  \StringTok{"Walkability Across Case Study Areas Analysis"}\NormalTok{,}
+  \AttributeTok{gp =} \FunctionTok{gpar}\NormalTok{(}\AttributeTok{fontsize =} \DecValTok{20}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{bike\_title }\OtherTok{\textless{}{-}} \FunctionTok{textGrob}\NormalTok{(}
+  \StringTok{"Bikeability Across Case Study Areas Analysis"}\NormalTok{, }
+  \AttributeTok{gp =} \FunctionTok{gpar}\NormalTok{(}\AttributeTok{fontsize =} \DecValTok{20}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{local\_transit\_title }\OtherTok{\textless{}{-}} \FunctionTok{textGrob}\NormalTok{(}
+  \StringTok{"Local Bus Across Case Study Areas Analysis"}\NormalTok{,}
+  \AttributeTok{gp =} \FunctionTok{gpar}\NormalTok{(}\AttributeTok{fontsize =} \DecValTok{20}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{city\_commute\_title }\OtherTok{\textless{}{-}} \FunctionTok{textGrob}\NormalTok{(}
+  \StringTok{"City Commute Across Case Study Areas Analysis"}\NormalTok{,}
+  \AttributeTok{gp =} \FunctionTok{gpar}\NormalTok{(}\AttributeTok{fontsize =} \DecValTok{20}\NormalTok{)}
+\NormalTok{)}
+
+\FunctionTok{grid.arrange}\NormalTok{(boxplot\_walk, density\_chart\_walk, }\AttributeTok{ncol=}\DecValTok{2}\NormalTok{, }\AttributeTok{widths=}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{), }\AttributeTok{top=}\NormalTok{walk\_title)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grid.arrange}\NormalTok{(boxplot\_bike, density\_chart\_bike, }\AttributeTok{ncol=}\DecValTok{2}\NormalTok{, }\AttributeTok{widths=}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{), }\AttributeTok{top=}\NormalTok{bike\_title)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grid.arrange}\NormalTok{(boxplot\_local\_transit, density\_chart\_local\_transit, }\AttributeTok{ncol=}\DecValTok{2}\NormalTok{, }\AttributeTok{widths=}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{), }\AttributeTok{top=}\NormalTok{local\_transit\_title)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-7-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grid.arrange}\NormalTok{(boxplot\_commute, density\_chart\_commute, }\AttributeTok{nrow=}\DecValTok{2}\NormalTok{, }\AttributeTok{widths=}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{), }\AttributeTok{top=}\NormalTok{city\_commute\_title)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-7-4.pdf}
+\# run kruskal wallis for statistical difference in trip efficiencies
+across case study areas
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kruskal.test}\NormalTok{(}\AttributeTok{data =}\NormalTok{ walk\_areas, trip\_speed }\SpecialCharTok{\textasciitilde{}}\NormalTok{ area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  trip_speed by area_name
+## Kruskal-Wallis chi-squared = 545.92, df = 3, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kruskal.test}\NormalTok{(}\AttributeTok{data =}\NormalTok{ bike\_areas, trip\_speed }\SpecialCharTok{\textasciitilde{}}\NormalTok{ area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  trip_speed by area_name
+## Kruskal-Wallis chi-squared = 1026, df = 3, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kruskal.test}\NormalTok{(}\AttributeTok{data =}\NormalTok{ local\_transit\_areas, trip\_speed }\SpecialCharTok{\textasciitilde{}}\NormalTok{ area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  trip_speed by area_name
+## Kruskal-Wallis chi-squared = 2762.1, df = 3, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kruskal.test}\NormalTok{(}\AttributeTok{data =}\NormalTok{ commute\_areas, trip\_speed }\SpecialCharTok{\textasciitilde{}}\NormalTok{ area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  trip_speed by area_name
+## Kruskal-Wallis chi-squared = 7659.1, df = 4, p-value < 2.2e-16
+\end{verbatim}
+
+\section{run dunn test for determining rank differences of travel
+efficiencies across case study
+areas}\label{run-dunn-test-for-determining-rank-differences-of-travel-efficiencies-across-case-study-areas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NemenyiTest}\NormalTok{(}\AttributeTok{x=}\NormalTok{walk\_areas}\SpecialCharTok{$}\NormalTok{trip\_speed, }\AttributeTok{g=}\NormalTok{walk\_areas}\SpecialCharTok{$}\NormalTok{area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Nemenyi's test of multiple comparisons for independent samples (tukey)  
+## 
+##                             mean.rank.diff    pval    
+## Nordhavn-Mjølnerparken            321.6805 6.3e-05 ***
+## Taastrupgaard-Mjølnerparken      -615.6737 4.0e-14 ***
+## Tingbjerg-Mjølnerparken          1055.0132 < 2e-16 ***
+## Taastrupgaard-Nordhavn           -937.3543 < 2e-16 ***
+## Tingbjerg-Nordhavn                733.3327 4.7e-14 ***
+## Tingbjerg-Taastrupgaard          1670.6870 < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NemenyiTest}\NormalTok{(}\AttributeTok{x=}\NormalTok{bike\_areas}\SpecialCharTok{$}\NormalTok{trip\_speed, }\AttributeTok{g=}\NormalTok{bike\_areas}\SpecialCharTok{$}\NormalTok{area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Nemenyi's test of multiple comparisons for independent samples (tukey)  
+## 
+##                             mean.rank.diff    pval    
+## Nordhavn-Mjølnerparken            790.0047 4.0e-14 ***
+## Taastrupgaard-Mjølnerparken       425.8130 3.3e-08 ***
+## Tingbjerg-Mjølnerparken          2200.6692 < 2e-16 ***
+## Taastrupgaard-Nordhavn           -364.1917 3.7e-06 ***
+## Tingbjerg-Nordhavn               1410.6645 < 2e-16 ***
+## Tingbjerg-Taastrupgaard          1774.8562 < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NemenyiTest}\NormalTok{(}\AttributeTok{x=}\NormalTok{local\_transit\_areas}\SpecialCharTok{$}\NormalTok{trip\_speed, }\AttributeTok{g=}\NormalTok{local\_transit\_areas}\SpecialCharTok{$}\NormalTok{area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Nemenyi's test of multiple comparisons for independent samples (tukey)  
+## 
+##                             mean.rank.diff    pval    
+## Nordhavn-Mjølnerparken          -1706.7400 < 2e-16 ***
+## Taastrupgaard-Mjølnerparken     -2673.7595 < 2e-16 ***
+## Tingbjerg-Mjølnerparken           761.1745 4.2e-14 ***
+## Taastrupgaard-Nordhavn           -967.0195 < 2e-16 ***
+## Tingbjerg-Nordhavn               2467.9145 < 2e-16 ***
+## Tingbjerg-Taastrupgaard          3434.9340 < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NemenyiTest}\NormalTok{(}\AttributeTok{x=}\NormalTok{commute\_areas}\SpecialCharTok{$}\NormalTok{trip\_speed, }\AttributeTok{g=}\NormalTok{commute\_areas}\SpecialCharTok{$}\NormalTok{area\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Nemenyi's test of multiple comparisons for independent samples (tukey)  
+## 
+##                                  mean.rank.diff    pval    
+## Nordhavn-Mjølnerparken               -3360.8360 < 2e-16 ***
+## Taastrupgaard-Mjølnerparken            425.6070 3.1e-05 ***
+## Tingbjerg-Mjølnerparken              -6494.8865 < 2e-16 ***
+## Tingbjerg by Train-Mjølnerparken     -3138.4932 < 2e-16 ***
+## Taastrupgaard-Nordhavn                3786.4430 < 2e-16 ***
+## Tingbjerg-Nordhavn                   -3134.0505 < 2e-16 ***
+## Tingbjerg by Train-Nordhavn            222.3427  0.1059    
+## Tingbjerg-Taastrupgaard              -6920.4935 < 2e-16 ***
+## Tingbjerg by Train-Taastrupgaard     -3564.1002 < 2e-16 ***
+## Tingbjerg by Train-Tingbjerg          3356.3933 < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ walk\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trip\_speed, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Efficiency (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Walkability Trip Speed Efficiency Across Case Study Areas"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ bike\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trip\_speed, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Efficiency (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Bikeability Trip Speed Efficiency Across Case Study Areas"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-11-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ local\_transit\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trip\_speed, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Efficiency (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Local Transit Trip Speed Efficiency Across Case Study Areas"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-11-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ commute\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trip\_speed, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Efficiency (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"City Commute Trip Speed Efficiency Across Case Study Areas"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-11-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ alt\_commute\_areas, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trip\_speed, }\AttributeTok{fill =}\NormalTok{ area\_name, }\AttributeTok{color =}\NormalTok{ area\_name)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Case Study Area"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Trip Efficiency (km/min)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Alt City Commute Trip Speed Efficiency Across Case Study Areas"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mobility_statistical_analysis_files/figure-latex/unnamed-chunk-11-5.pdf}
+
+\end{document}

@@ -1,0 +1,347 @@
+---
+title: Stochastic Topographical Mobility Analysis (STMA) in the Copenhagen Metropolitan
+  Area
+author: "Matthew Papesh"
+date: "2025-04-23"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+#Include needed libraries below:
+
+```{r}
+suppressWarnings({
+ if(!require("ggplot2")) {
+ install.packages("ggplot2", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("ggplot2")
+ }
+ if(!require("ggtext")) {
+ install.packages("ggtext", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("ggtext")
+ }
+ if(!require("tidyverse")) {
+ install.packages("tidyverse", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("tidyverse")
+ }
+ if(!require("dplyr")) { 
+ install.packages("dplyr", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("dplyr")
+ }
+ if(!require("DescTools")) {
+ install.packages("DescTools", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("DescTools")
+ }
+ if(!require("gridExtra")) {
+ install.packages("gridExtra", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("gridExtra")
+ }
+ if(!require("knitr")) {
+ install.packages("knitr", repo="http://cran.us.r-project.org", quite=TRUE, message=FALSE)
+ require("knitr")
+ }
+})
+```
+
+# Import mobility data: 
+```{r}
+# imported node data by case study area 
+nordhavn_nodes = read.csv("./clean_network_mobility_data/nordhavn_nodes.csv")
+mjolnerparken_nodes = read.csv("./clean_network_mobility_data/mjolnerparken_nodes.csv")
+tingbjerg_nodes = read.csv("./clean_network_mobility_data/tingbjerg_nodes.csv")
+taastrupgaard_nodes = read.csv("./clean_network_mobility_data/taastrupgaard_nodes.csv")
+# imported trip data by case study area 
+nordhavn_trips = read.csv("./stma_results/nordhavn_results.csv")
+mjolnerparken_trips = read.csv("./stma_results/mjolnerparken_results.csv")
+tingbjerg_trips = read.csv("./stma_results/tingbjerg_results.csv")
+taastrupgaard_trips = read.csv("./stma_results/taastrupgaard_results.csv")
+```
+
+# qaulitative location data:
+```{r}
+# count the number of features of a value type in a given vector
+count_feat <- function(vector, type_value) {
+  # vector     : vector name 
+  # type_value : the value to count inside given vector
+  sum(vector == type_value, na.rm=TRUE)
+}
+
+# vectors of feature types for each case study
+nord_f <- (nordhavn_nodes %>% filter(node_id == "inner" | node_id == "frontier"))$type
+mjol_f <- (mjolnerparken_nodes %>% filter(node_id == "inner" | node_id == "frontier"))$type
+ting_f <- (tingbjerg_nodes %>% filter(node_id == "inner" | node_id == "frontier"))$type
+taast_f <- (taastrupgaard_nodes %>% filter(node_id == "inner" | node_id == "frontier"))$type
+
+data <- data.frame(
+  Case.Study.Area    = rep(c("Nordhavn","Mjølnerparken","Tingbjerg","Taastrupgaard"), each = 5),
+  Feature = rep(c("Housing","Necessity","Amenity","Company","Parking"), 4),
+  Count   = c(
+    count_feat(nord_f,  "house"),   count_feat(nord_f,  "necessity"),
+    count_feat(nord_f,  "amenity"), count_feat(nord_f,  "company"),
+    count_feat(nord_f,  "parking"),
+
+    count_feat(mjol_f,  "house"),   count_feat(mjol_f,  "necessity"),
+    count_feat(mjol_f,  "amenity"), count_feat(mjol_f,  "company"),
+    count_feat(mjol_f,  "parking"),
+
+    count_feat(ting_f,  "house"),   count_feat(ting_f,  "necessity"),
+    count_feat(ting_f,  "amenity"), count_feat(ting_f,  "company"),
+    count_feat(ting_f,  "parking"),
+
+    count_feat(taast_f, "house"),   count_feat(taast_f, "necessity"),
+    count_feat(taast_f, "amenity"), count_feat(taast_f, "company"),
+    count_feat(taast_f, "parking")
+  )
+)
+
+ggplot(data, aes(x = Case.Study.Area, y = Count, fill = Feature)) +
+  labs(title = " Case Study Area Features") +
+  geom_col(position = "dodge", colour = "black", alpha = 0.75) +
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  theme(
+  plot.title = element_text(size = 20),       # Title text size
+  axis.title.x = element_text(size = 16),      # X-axis label size
+  axis.title.y = element_text(size = 16),      # Y-axis label size
+  axis.text.x = element_text(size = 14),       # X-axis tick labels size
+  axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+  legend.title = element_text(size = 16),      # Legend title size
+  legend.text = element_text(size = 14)        # Legend item labels size
+)
+```
+# 
+```{r}
+# case study area data grouped
+areas <- data_frame(
+  distance_km = c(nordhavn_trips$distance_km, mjolnerparken_trips$distance_km, tingbjerg_trips$distance_km, taastrupgaard_trips$distance_km),
+  time_min = c(nordhavn_trips$time_min, mjolnerparken_trips$time_min, tingbjerg_trips$time_min, taastrupgaard_trips$time_min),
+  trip_speed = c(nordhavn_trips$distance_km/nordhavn_trips$time_min, mjolnerparken_trips$distance_km/mjolnerparken_trips$time_min, tingbjerg_trips$distance_km/tingbjerg_trips$time_min, taastrupgaard_trips$distance_km/taastrupgaard_trips$time_min),
+  trip_type = c(nordhavn_trips$sample_id, mjolnerparken_trips$sample_id, tingbjerg_trips$sample_id, taastrupgaard_trips$sample_id),
+  area_name = c(rep("Nordhavn", nrow(nordhavn_trips)), rep("Mjølnerparken", nrow(mjolnerparken_trips)), rep("Tingbjerg", nrow(tingbjerg_trips)), rep("Taastrupgaard", nrow(taastrupgaard_trips)))
+)
+
+# case study area data filtered by trip
+walk_areas <- areas %>% filter(trip_type == "walk")
+bike_areas <- areas %>% filter(trip_type == "bike")
+local_transit_areas <- areas %>% filter(trip_type == "local")
+commute_areas <- areas %>% filter(trip_type == "commute")
+alt_commute_areas <- areas %>% filter(trip_type == "alt_commute")
+# rename area for alternative commute 
+alt_commute_areas$area_name = paste0(alt_commute_areas$area_name, rep(" by Train", nrow(alt_commute_areas)))
+# combine alternative commutes back into main list 
+commute_areas <- rbind(commute_areas, alt_commute_areas)
+```
+
+# create density charts for test scenarios comparing case study areas 
+```{r}
+density_chart_walk <- ggplot(data = walk_areas, aes(x = distance_km, fill = area_name, color = area_name)) +
+  geom_density(alpha = 0.15, size = 1) + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  theme_minimal() +
+  labs(x = "Distance (km)", y = "Frequency") +
+  theme(
+  plot.title = element_text(size = 20),       # Title text size
+  axis.title.x = element_text(size = 16),      # X-axis label size
+  axis.title.y = element_text(size = 16),      # Y-axis label size
+  axis.text.x = element_text(size = 14),       # X-axis tick labels size
+  axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+  legend.title = element_text(size = 16),      # Legend title size
+  legend.text = element_text(size = 14)        # Legend item labels size
+  )
+
+density_chart_bike <- ggplot(data = bike_areas, aes(x = distance_km, fill = area_name, color = area_name)) +
+  geom_density(alpha = 0.15, size = 1) + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  theme_minimal() +
+  labs(x = "Distance (km)", y = "Frequency") + 
+  theme(
+  plot.title = element_text(size = 20),       # Title text size
+  axis.title.x = element_text(size = 16),      # X-axis label size
+  axis.title.y = element_text(size = 16),      # Y-axis label size
+  axis.text.x = element_text(size = 14),       # X-axis tick labels size
+  axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+  legend.title = element_text(size = 16),      # Legend title size
+  legend.text = element_text(size = 14)        # Legend item labels size
+  )
+
+density_chart_local_transit <- ggplot(data = local_transit_areas, aes(x = distance_km, fill = area_name, color = area_name)) +
+  geom_density(alpha = 0.15, size = 1) + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  theme_minimal() +
+  labs(x = "Distance (km)", y = "Frequency") + 
+  theme(
+  plot.title = element_text(size = 20),       # Title text size
+  axis.title.x = element_text(size = 16),      # X-axis label size
+  axis.title.y = element_text(size = 16),      # Y-axis label size
+  axis.text.x = element_text(size = 14),       # X-axis tick labels size
+  axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+  legend.title = element_text(size = 16),      # Legend title size
+  legend.text = element_text(size = 14)        # Legend item labels size
+  )
+
+density_chart_commute <- ggplot(data = commute_areas, aes(x = distance_km, fill = area_name, color = area_name)) +
+  geom_density(alpha = 0.15, size = 1) + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  theme_minimal() +
+  labs(x = "Distance (km)", y = "Frequency") + 
+  theme(
+  plot.title = element_text(size = 20),       # Title text size
+  axis.title.x = element_text(size = 16),      # X-axis label size
+  axis.title.y = element_text(size = 16),      # Y-axis label size
+  axis.text.x = element_text(size = 14),       # X-axis tick labels size
+  axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+  legend.title = element_text(size = 16),      # Legend title size
+  legend.text = element_text(size = 14)        # Legend item labels size
+  )
+```
+
+# create boxplots for test scenarios comparing case study areas
+```{r}
+boxplot_walk <- ggplot(data = walk_areas, aes(x = area_name, y = trip_speed, color = area_name)) + 
+  geom_boxplot() + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  coord_cartesian(ylim = c(0.05, 0.10)) +
+  xlab("Case Study Area") + 
+  ylab("Trip Speed (km/min)") + 
+  theme(
+    legend.position = "none", 
+    axis.title.x = element_blank(), 
+    axis.text.x = element_blank(), 
+    axis.ticks.x = element_blank(),
+    axis.title.y = element_text(size = 16),      # Y-axis label size
+    axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+    legend.title = element_text(size = 16),      # Legend title size
+    legend.text = element_text(size = 14)        # Legend item labels size
+  )
+
+boxplot_bike <- ggplot(data = bike_areas, aes(x = area_name, y = trip_speed, color = area_name)) + 
+  geom_boxplot() + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  xlab("Case Study Area") + 
+  ylab("Trip Speed (km/min)") + 
+  theme(
+    legend.position = "none", 
+    axis.title.x = element_blank(), 
+    axis.text.x = element_blank(), 
+    axis.ticks.x = element_blank(),
+    axis.title.y = element_text(size = 16),      # Y-axis label size
+    axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+    legend.title = element_text(size = 16),      # Legend title size
+    legend.text = element_text(size = 14)        # Legend item labels size
+  )
+
+boxplot_local_transit <- ggplot(data = local_transit_areas, aes(x = area_name, y = trip_speed, color = area_name)) + 
+  geom_boxplot() + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  xlab("Case Study Area") + 
+  ylab("Trip Speed (km/min)") + 
+  theme(
+    legend.position = "none", 
+    axis.title.x = element_blank(), 
+    axis.text.x = element_blank(), 
+    axis.ticks.x = element_blank(),
+    axis.title.y = element_text(size = 16),      # Y-axis label size
+    axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+    legend.title = element_text(size = 16),      # Legend title size
+    legend.text = element_text(size = 14)        # Legend item labels size
+  )
+
+boxplot_commute <- ggplot(data = commute_areas, aes(x = area_name, y = trip_speed, color = area_name)) + 
+  geom_boxplot() + 
+  scale_fill_brewer(palette = "Set2") + 
+  scale_color_brewer(palette = "Set2") + 
+  xlab("Case Study Area") + 
+  ylab("Trip Speed (km/min)") + 
+  theme(legend.position = "none", axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank()) + 
+  theme(
+  plot.title = element_text(size = 20),       # Title text size
+  axis.title.x = element_text(size = 16),      # X-axis label size
+  axis.title.y = element_text(size = 16),      # Y-axis label size
+  axis.text.x = element_text(size = 14),       # X-axis tick labels size
+  axis.text.y = element_text(size = 14),       # Y-axis tick labels size
+  legend.title = element_text(size = 16),      # Legend title size
+  legend.text = element_text(size = 14)        # Legend item labels size
+  )
+```
+
+# visualize STMA results:
+```{r}
+library(grid)
+
+walk_title <- textGrob(
+  "Walkability Across Case Study Areas Analysis",
+  gp = gpar(fontsize = 20)
+)
+bike_title <- textGrob(
+  "Bikeability Across Case Study Areas Analysis", 
+  gp = gpar(fontsize = 20)
+)
+local_transit_title <- textGrob(
+  "Local Bus Across Case Study Areas Analysis",
+  gp = gpar(fontsize = 20)
+)
+city_commute_title <- textGrob(
+  "City Commute Across Case Study Areas Analysis",
+  gp = gpar(fontsize = 20)
+)
+
+grid.arrange(boxplot_walk, density_chart_walk, ncol=2, widths=c(6,8), top=walk_title)
+grid.arrange(boxplot_bike, density_chart_bike, ncol=2, widths=c(6,8), top=bike_title)
+grid.arrange(boxplot_local_transit, density_chart_local_transit, ncol=2, widths=c(6,8), top=local_transit_title)
+grid.arrange(boxplot_commute, density_chart_commute, nrow=2, widths=c(6,8), top=city_commute_title)
+```
+# run kruskal wallis for statistical difference in trip efficiencies across case study areas
+```{r}
+kruskal.test(data = walk_areas, trip_speed ~ area_name)
+kruskal.test(data = bike_areas, trip_speed ~ area_name)
+kruskal.test(data = local_transit_areas, trip_speed ~ area_name)
+kruskal.test(data = commute_areas, trip_speed ~ area_name)
+```
+
+```{r}
+
+```
+
+# run dunn test for determining rank differences of travel efficiencies across case study areas
+```{r}
+NemenyiTest(x=walk_areas$trip_speed, g=walk_areas$area_name)
+NemenyiTest(x=bike_areas$trip_speed, g=bike_areas$area_name)
+NemenyiTest(x=local_transit_areas$trip_speed, g=local_transit_areas$area_name)
+NemenyiTest(x=commute_areas$trip_speed, g=commute_areas$area_name)
+```
+
+```{r}
+ggplot(data = walk_areas, aes(x = trip_speed, fill = area_name, color = area_name)) + 
+  geom_histogram(bins = 100) + 
+  xlab("Case Study Area") + 
+  ylab("Trip Efficiency (km/min)") + 
+  labs(title = "Walkability Trip Speed Efficiency Across Case Study Areas") 
+ggplot(data = bike_areas, aes(x = trip_speed, fill = area_name, color = area_name)) + 
+  geom_histogram(bins = 100) + 
+  xlab("Case Study Area") + 
+  ylab("Trip Efficiency (km/min)") + 
+  labs(title = "Bikeability Trip Speed Efficiency Across Case Study Areas") 
+ggplot(data = local_transit_areas, aes(x = trip_speed, fill = area_name, color = area_name)) + 
+  geom_histogram(bins = 100) + 
+  xlab("Case Study Area") + 
+  ylab("Trip Efficiency (km/min)") + 
+  labs(title = "Local Transit Trip Speed Efficiency Across Case Study Areas") 
+ggplot(data = commute_areas, aes(x = trip_speed, fill = area_name, color = area_name)) + 
+  geom_histogram(bins = 100) + 
+  xlab("Case Study Area") + 
+  ylab("Trip Efficiency (km/min)") + 
+  labs(title = "City Commute Trip Speed Efficiency Across Case Study Areas") 
+ggplot(data = alt_commute_areas, aes(x = trip_speed, fill = area_name, color = area_name)) + 
+  geom_histogram(bins = 100) + 
+  xlab("Case Study Area") + 
+  ylab("Trip Efficiency (km/min)") + 
+  labs(title = "Alt City Commute Trip Speed Efficiency Across Case Study Areas") 
+```
