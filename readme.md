@@ -10,6 +10,15 @@
 Mobility is an area of study that focuses on how different demographics of people can move and travel within a society. Expected mobility is defined as the ease of travel an area can offer. Whether that be walkability, bike lane infrastructure, or the closeness of nearby transit stops. Mobility is also a concern for newcomers to a country. A newcomer is a person who has recently arrived to a new country, whether that be through asylum or immigration of any form and at any time. The objective of this tool is to better understand the mobility of newcomers in the Copenhagen metropolitan area of Denmark. Although newcomer mobility involves challenges, such as integrating into society, the purpose of this software is to explore specifically expected mobility. <br>
 </span>
 
+### **1.1.1 Disclaimer**:
+<span style="margin-left: 2em;">
+This tool requires data on movement, travel, and mobility within geographical areas. Tools, such as Google Maps, are excellent at giving travel estimates. Tools like this offer Mobility as a Service (MaaS). The STMA tool leverages the Distance Matrix AI MaaS tool. This tool offers these services on travel estimating by the Distance Matrix Application Programming Interface (API). **The Distance Matrix API was used for minimizing the monetary cost of querying data from their service. The STMA tool WILL QUERY what you ask of it. If a connection is made between two nodes with 100 sampled locations each, the STMA tool WILL QUERY TRIPS FROM 100 LOCATIONS ONTO ANOTHER 100 LOCATIONS. This will cause 10,000 trips to be evaluated. 10,000 TRIPS WILL BE REQUESTED FROM THE Distance Matrix API SERVICE and WILL be BILLED to your Distance Matrix ACCOUNT.**
+</span>
+
+<span style="margin-left: 2em;">
+The STMA tool is public and open source for free use! HOWEVER, **CREATE LARGE NETWORKS AND QUERY AT YOUR OWN RISK.** Networks are not necessarily expensive, but if a large enough network is created, the STMA tool will automatically request a great amount of data from the Distance Matrix API, which may be expensive. **IT IS MY ADVICE TO CREATE A SMALL TEST NETWORK WITH YOUR Distance Matrix API ACCOUNT FIRST BEFORE TESTING WITH LARGER NETWORKS!** LASTLY, **DATA QUERIED FROM Distance Matrix API can be saved locally in your STMA project to be re-used for inferring larger trips from the smaller ones without needing to re-query, which will be more costly. 
+</span>
+
 ### **1.2 Preliminary Literature**:
 
 <span style="margin-left: 2em;">
