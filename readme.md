@@ -346,7 +346,7 @@ lat,lon,time
 </figure>
 
 <figure style="text-align: center;">
-  <img src="https://github.com/Matthew-Papesh/Stochastic_Topographical_Mobility_Analysis_WPI_IQP/blob/main/images/doc_visuals/trip_time_heatmap_example.png" alt="An example of trip time heatmap" style="max-width: 75%;">
+  <img src="https://raw.githubusercontent.com/Matthew-Papesh/Stochastic_Topographical_Mobility_Analysis_WPI_IQP/refs/heads/main/images/doc_visuals/trip_time_heatmap_example.png" alt="An example of trip time heatmap" style="max-width: 75%;">
   <figcaption style="font-style: italic; text-align: center;">
     Figure 12<br>
     An Example a Trip Time Heatmap from the <span style="font-style: italic">walk_time.csv</span> File.
