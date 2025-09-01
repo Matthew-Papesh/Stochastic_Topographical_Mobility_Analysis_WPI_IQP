@@ -1,6 +1,6 @@
 # Stochastic Topographical Mobility Analysis (STMA) in the Copenhagen Metropolitan Area  
 
-### Matthew Papesh - March 17th, 2025
+### Matthew Ryan Papesh - March 17th, 2025
 
 ## **1.0 Overview**:
 
